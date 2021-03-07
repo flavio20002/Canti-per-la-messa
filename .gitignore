@@ -1,0 +1,10 @@
+*.sublime*
+temp
+*.pdf
+*.log
+*.aux
+*.out
+*.sxc
+*.sxd
+*.sbx
+*.gz

@@ -1,0 +1,121 @@
+% Copyright (C) 2013 Kevin W. Hamlen
+%
+% The latest version of this program can be obtained from
+% http://songs.sourceforge.net.
+
+\documentclass[twoside, 12pt]{article}
+%\usepackage[margin=10mm,paperwidth=114mm,paperheight=172mm]{geometry}
+\usepackage[margin=19mm,paperwidth=148.5mm,paperheight=210mm]{geometry}
+\usepackage[bookmarks,hidelinks]{hyperref} % for pdf index and links
+\usepackage[chorded]{songs}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[svgnames]{xcolor} % Required to specify font color
+\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}} % Generic publisher logo
+\usepackage{graphicx} % Required for box manipulation
+\usepackage{fancyhdr}
+
+\settowidth{\versenumwidth}{1.\ }
+\definecolor{rosso}{RGB}{194,28,29}
+\renewcommand{\printchord}[1]{\color{rosso}\rmfamily\bf#1}
+\renewcommand{\stitlefont}{\rmfamily\Large\bf}
+\setlength{\sbarheight}{0pt}
+\noversenumbers
+\nosongnumbers
+\setlength{\idxheadwidth}{0cm} % Suppress shaded boxes that begin each alphabetic block of a large title index
+\songcolumns{1}
+\solfedge
+\notenamesin{LA}{SI}{DO}{RE}{MI}{FA}{SOL}
+\notenamesout{La}{Si}{Do}{Re}{Mi}{Fa}{Sol}
+
+\usepackage{xpatch}
+\sepindexesfalse
+
+\newindex{titleidx}{cbtitle}
+\newindex{titleidx2}{cbtitle2}
+
+\indexsongsas{titleidx}{\thepage}
+\indexsongsas{titleidx2}{\thepage}
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\rotrt}[1]{\rotatebox{90}{#1}} % Command to rotate right 90 degrees
+\newcommand*{\rotlft}[1]{\rotatebox{-90}{#1}} % Command to rotate left 90 degrees
+
+\newcommand*{\titleBC}{\begingroup % Create the command for including the title page in the document
+\centering % Center all text
+
+\def\CP{\textit{\Huge Canzoni per la messa}} % Title
+
+\settowidth{\unitlength}{\CP} % Set the width of the curly brackets to the width of the title
+{\color{Black}\resizebox*{\unitlength}{\baselineskip}{\rotrt{$\}$}}} \\[\baselineskip] % Print top curly bracket
+\textcolor{Black}{\CP} \\[\baselineskip] % Print title
+{\color{Black}\Large con accordi per chitarra} \\ % Tagline or further description
+{\color{Black}\resizebox*{\unitlength}{\baselineskip}{\rotlft{$\}$}}} % Print bottom curly bracket
+
+\vfill % Whitespace between the title and the author name
+
+\includegraphics[width=\textwidth]{francesco.jpg}
+
+\vfill % Whitespace between the author name and the publisher logo
+
+{\Large\textbf{Parrocchia di San Francesco}}\\[0.5\baselineskip] % Author name
+
+Trieste
+
+\endgroup}
+
+%\pagestyle{fancy}
+\pagestyle{empty}
+\fancyhf{}
+\fancyfoot[LE,RO]{\thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\begin{document}
+\pagenumbering{arabic}
+\titleBC
+\thispagestyle{empty}
+\newpage\mbox{}
+\thispagestyle{empty}
+\newpage
+
+%\songsection{Canti d'ingresso}
+\begin{songs}{titleidx}
+\input{Lista_Canti.sbd}
+\end{songs}
+
+\cleardoublepage
+\centering
+\topskip0pt
+\vspace*{\fill}
+{\Huge \textbf{CANONI}}
+\vspace*{\fill}
+
+\cleardoublepage
+
+\begin{songs}{titleidx2}
+\input{Lista_Canoni.sbd}
+\end{songs}
+
+\cleardoublepage
+\centering
+\topskip0pt
+\vspace*{\fill}
+{\Huge \textbf{INDICI}}
+\vspace*{\fill}
+
+\cleardoublepage
+
+\showindex[1]{Indice dei canti}{titleidx}
+\newpage\mbox{}
+\showindex[1]{Indice dei canoni}{titleidx2}
+\newpage
+
+\end{document}
