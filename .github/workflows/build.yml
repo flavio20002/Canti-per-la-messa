@@ -21,11 +21,15 @@ jobs:
         - name: Set up Git repository
           uses: actions/checkout@v2
         - name: Compile LaTeX document
-          uses: xu-cheng/latex-action@v2
+          uses: xu-cheng/texlive-action/full@v1
           with:
-            root_file: LibrettoCantiParrocchia.tex
+            run: |
+              pdflatex LibrettoCantiParrocchia.tex
+              texlua songidx.lua cbtitle.sxd cbtitle.sbx
+              texlua songidx.lua cbtitle2.sxd cbtitle2.sbx
+              pdflatex LibrettoCantiParrocchia.tex
         - name: Archive Pdf Document
           uses: actions/upload-artifact@v2
           with:
-            name: PDF
+            name: LibrettoCantiParrocchia
             path: LibrettoCantiParrocchia.pdf
